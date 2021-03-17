@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/MonedaJS.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+    </head>
+    <body>
+
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_moneda" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+
+                            <h2 class="w3-center">REGISTRAR MONEDA</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "REGISTRAR".</p>
+                        </div>
+                        <div class="w3-container w3-white" id="cont_datos" style=" margin:0 5% 3% 5%;">
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Código de Moneda:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="width:20%; outline: none; background: #ccc" disabled ="" class="w3-input" type="text" id="codigo_moneda" onkeypress="if (event.keyCode === 13) {
+                                                    recuperarMoneda();
+                                                }
+                                               " placeholder=" " size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Moneda:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="outline: none; background: #ffffff" disabled="" class="w3-input" type="text" id="descripcion_moneda" placeholder="Ingrese Descripción..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Símbolo&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="width:50%; outline: none; background: #ffffff" disabled="" class="w3-input" type="text" id="simbolo_moneda" placeholder="Símbolo de la Moneda..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3-container">
+                            <div id="datos_Abuscar" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Moneda" onkeyup="buscadorMoneda();">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Moneda</th>
+                                                    <th>Símbolo</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaMoneda">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" agregarMoneda(), limpiarMoneda();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    REGISTRAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" modificarMoneda(), limpiarMoneda();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    MODIFICAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" eliminarMoneda(), limpiarMoneda();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    ELIMINAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputMoneda('descripcion_moneda', 'simbolo_moneda');" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick=" mostrarTablaMoneda(), limpiarMoneda();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick=" limpiarMoneda();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

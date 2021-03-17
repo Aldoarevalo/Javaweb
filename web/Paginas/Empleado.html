@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/EmpleadoJS.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_empleado" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+                            <h2 class="w3-center">REGISTRAR EMPLEADO</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "REGISTRAR".</p>
+                        </div>
+
+                        <div class="w3-container w3-white" id="cont_datos" style=" margin:0 5% 3% 5%;">
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Código de Empleado:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="width:20%; outline: none; background: #ccc" class="w3-input" type="text" id="codigo_empleado" onkeypress="if (event.keyCode === 13) {
+                                                    recuperarEmpleado();
+                                                }
+                                               " placeholder=" " size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Cédula de Identidad Nro.:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input onkeyup="format(this)" onchange="format(this)" disabled ="" style="outline: none; background: #ffffff" class="w3-input" type="text" id="ci" placeholder="Ingrese el Nro. de Cédula..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Nombre:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input disabled ="" style="outline: none; background: #ffffff" class="w3-input" type="text" id="nombre" placeholder="Ingrese el Nombre..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Apellido:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input disabled ="" style="outline: none; background: #ffffff" class="w3-input" type="text" id="apellido" placeholder="Ingrese el Apellido..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Fecha de Nacimiento:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="outline: none; background: #ffffff"  class="w3-input" type="date" disabled="" id="fecha_nac" size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Teléfono Nro.:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input disabled ="" style="outline: none; background: #ffffff" class="w3-input" type="text" id="telefono" placeholder="Ingrese el Nro. de Teléfono..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Dirección:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input disabled ="" style="outline: none; background: #ffffff" class="w3-input" type="text" id="direccion" placeholder="Ingrese la Dirección..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w3-row w3-section">
+                                <div class="w3-col" style=" width:30%;">
+                                    <p class="w3-small w3-right">
+                                        <label class="w3-label w3-validate">Seleccione Ciudad:&nbsp;</label>
+                                    </p>
+                                </div>
+                                <div class="w3-rest">
+                                    <select 
+                                        disabled="" class="w3-select" name="MenuCiudad" id="menuCiudad">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w3-row w3-section">
+                                <div class="w3-col" style=" width:30%;">
+                                    <p class="w3-small w3-right">
+                                        <label class="w3-label w3-validate">Seleccione Nacionalidad:&nbsp;</label>
+                                    </p>
+                                </div>
+                                <div class="w3-rest">
+                                    <select 
+                                        disabled="" class="w3-select" name="MenuNacionalidad" id="menuNacionalidad">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Empleado" onkeyup="buscadorEmpleado();">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cod.</th>
+                                                    <th>C.I. N°.</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>
+                                                    <th>Fecha Nac.</th>
+                                                    <th>Tel.</th>
+                                                    <th>Dirección</th>
+                                                    <th>Ciudad</th>
+                                                    <th>Nacionalidad</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaEmpleado">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" agregarEmpleado(), limpiarEmpleado();" >
+                                    <i class="fas fa-plus"></i>
+                                    REGISTRAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" modificarEmpleado(), limpiarEmpleado();" >
+                                    <i class="fas fa-edit"></i>
+                                    MODIFICAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" eliminarEmpleado(), limpiarEmpleado();" >
+                                    <i class="far fa-trash-alt"></i>
+                                    ELIMINAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputEmpleado(
+                                                'ci', 'nombre', 'apellido', 'fecha_nac', 'telefono', 'direccion', 'menuCiudad', 'menuNacionalidad');" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick=" mostrarTablaEmp(), limpiarEmpleado();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="limpiarEmpleado();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

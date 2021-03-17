@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- 
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/Orden_Compra.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/moment.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            function abrirDocPdf(bandera) {
+                var filtro;
+                //var url="/JavaWeb_Compras/Informes_ComprasCTR?bandera="+bandera;
+                if (bandera === 6) {
+                    filtro = document.getElementById('orden_compra_nro').value;
+                    url = "/JavaWeb_Compras/Informes_ComprasCTR?bandera=" + bandera + "&filtro=" + filtro;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                //xhr.open("GET", "/LaboratorioLPIII/GestorReportesCTRL?bandera="+bandera+"&valor="+idFiltro+"");
+                xhr.responseType = "arraybuffer";
+
+                xhr.onload = function () {
+                    if (this.status === 200) {
+                        var blob = new Blob([xhr.response], {type: "application/pdf"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        window.open(objectUrl, '_blank');
+                    }
+                };
+                xhr.send();
+                // xhr.send(JSON.stringify(datos = {bandera: bandera}));
+                //xhr.send(JSON.stringify(datos = {bandera: 5, id: $('#codigo_solicitud').val()}));
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_orden_compra" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+                            <h2 class="w3-center">ORDEN DE COMPRA</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "GENERAR".</p>
+                        </div>
+
+                        <div class="w3-row-padding">
+                            <div class="w3-third">
+                                <label class="w3-small w3-center w3-label w3-validate">Orden de Compra N°&nbsp;</label>
+                                <input disabled="" id="orden_compra_nro" style="width: 40%; outline: none; background: #ccc" class="w3-input w3-border-left" type="text" onkeypress="if (event.keyCode === 13) {
+                                            RecuperarSolicitudCompra();
+                                        }
+                                       ">
+                            </div>
+                            <div class="w3-third w3-right">
+                                <label class="w3-small w3-center w3-label w3-validate">Fecha&nbsp;</label>
+                                <input style="background: #ffffff" disabled="" id="orden_compra_fecha" class="w3-input w3-border-top" type="date">
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="w3-third w3-margin-top">
+                                <label class="w3-small w3-center w3-label w3-validate">Solicitud de Compra N°&nbsp;</label>
+                                <input disabled="" id="solcitud_compra_nro" style="width: 40%; outline: none; background: #ccc" class="w3-input w3-border-left" type="text" onfocus="mostrarSolicitud_Compra();">
+                                <input disabled="" id="descripcion_solicitud_compra" style="margin-top: -16%; margin-left: 45% ;width: 270%; outline: none; background: #ffffff" class="w3-input w3-border-top" type="tex">
+                            </div>
+                        </div>
+                        <div class="w3-row-padding">
+                            <div class="w3-third w3-left w3-margin-top">
+                                <label class="w3-small w3-center w3-label w3-validate">Empleado&nbsp;</label>
+                                <input disabled="" id="codigo_empleado" style="width: 40%; outline: none; background: #ccc" class="w3-input w3-border-top" type="tex" onfocus="mostrarEmpleadoCompra()">
+                                <input disabled="" id="empleado" style="margin-top: -16%; margin-left: 45% ;width: 100%; outline: none; background: #ffffff" class="w3-input w3-border-top" type="tex">
+                            </div>
+                            <br>
+                            <div style="margin-top: -8%; margin-left: 53%" class="w3-third">
+                                <label class="w3-small w3-center w3-label w3-validate">Empresa&nbsp;</label>
+                                <input disabled="" id="codigo_empresa" style="width: 40%; outline: none; background: #ccc" class="w3-input w3-border-top" type="tex" onfocus="mostrarEmpresaCompra();">
+                                <input disabled="" id="empresa" style="margin-top: -16%; margin-left: 45% ;width: 100%; outline: none; background: #ffffff" class="w3-input w3-border-top" type="tex">
+                            </div>
+                        </div>
+                        <div class="w3-row-padding">
+                            <div class="w3-third w3-left w3-margin-top">
+                                <label class="w3-small w3-center w3-label w3-validate">Proveedor&nbsp;</label>
+                                <input disabled="" id="codigo_proveedor" style="width: 40%; outline: none; background: #ccc" class="w3-input w3-border-top" type="tex" onfocus="mostrarProveedorCompra();">
+                                <input disabled="" id="proveedor" style="margin-top: -16%; margin-left: 45% ;width: 100%; outline: none; background: #ffffff" class="w3-input w3-border-top" type="tex">
+                            </div>
+                            <div style="margin-top: -8%; margin-left: 53%" class="w3-third">
+                                <label class="w3-small w3-center w3-label w3-validate">Condición de Compra&nbsp;</label>
+                                <select disabled="" id="condicion_compra" style="width: 80%; outline: none; background: #ffffff" class="w3-input w3-border">
+                                    <option id="col_1" value="0">--------------------</option>
+                                    <option id="col_2" value="CONTADO">CONTADO</option>
+                                    <option id="col_3" value="30 DIAS">30 DIAS</option>
+                                    <option id="col_4" value="15 DIAS">15 DIAS</option>
+                                    <option id="col_5" value="10 DIAS">10 DIAS</option>
+                                    <option id="col_6" value="5 DIAS">5 DIAS</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="w3-row-padding">
+                            <div class="w3-third w3-left w3-margin-top">
+                                <label class="w3-medium w3-center w3-label">DETALLE:&nbsp;</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="w3-row-padding">
+                            <div class="w3-rest">
+                                <label style="margin-left: 1%" class="w3-small w3-center w3-label w3-validate">Mercaderia&nbsp;</label>
+                                <br>
+                                <input disabled="" style="display:inline; margin-left: 1%; width:10% ;outline: none; background: #ccc" class="w3-input w3-border-top" type="text" disabled="" id="codigo_mercaderia" size="80" tabindex="2" value required onfocus="mostrarMercaderiaCompra()">
+                                <input disabled="" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:10% ;outline: none; background: #ffffff" class="w3-input w3-border-top" type="text" disabled="" id="medida" placeholder="Medida" size="80" tabindex="2" value required>
+                                <input disabled="" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:30% ;outline: none; background: #ffffff" class="w3-input w3-border-top" type="text" disabled="" id="mercaderia" placeholder="Mercaderia" size="80" tabindex="2" value required>
+                                <input disabled="" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:15% ;outline: none; background: #ffffff" class="w3-input w3-border-top" type="text" disabled="" id="marca" placeholder="Marca" size="80" tabindex="2" value required>
+
+                                <input disabled="" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:15% ;outline: none; background: #ffffff" class="w3-input w3-border-top" type="text" disabled="" id="precio_unitario_mercaderia" placeholder="P. Unitario" size="80" tabindex="2">
+                                <input disabled="" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:11% ;outline: none; background: #ffffff" class="w3-input w3-border-top" type="text" disabled="" id="cantidad_mercaderia" placeholder="Cantidad" size="80" tabindex="2" value required
+                                       onkeypress="if (event.keyCode === 13) {
+                                                   verificarDetalleCompra(),
+                                                           agregarFila_TablaMercaderia(), limpiarInputMercaderia_Compra();
+                                               }">
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div>
+                                <table class="w3-table-all w3-chiquito" > 
+                                    <thead>
+                                        <tr>
+                                            <th style=" width: 10%;">CODIGO</th>
+                                            <th style=" width: 10%;">MEDIDA</th>
+                                            <th style=" width: 28%;">DESCRIPCION</th>
+                                            <th style=" width: 15%;">MARCA</th>
+                                            <th style=" width: 10%;">CANTIDAD</th>
+                                            <th style=" width: 15%;">P. UNITARIO</th>
+                                            <th style=" width: 15%;">S. TOTAL</th>
+                                            <th style=" width: 5%;"><img class="update" id="update" src="../Recursos/Img/update.png"/></th>
+                                            <th style=" width: 5%;"><img class="delete" id="delete" src="../Recursos/Img/delete.png"/></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalleTablaMercaderia_Compra"> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Solicitud_Compra" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Solicitud_Compra').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Solicitud_Compra" onkeyup="buscador('filtro_buscador_Solicitud_Compra', 'Tabla_Solicitud_Compra');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>NRO. DE SOLICITUD</th>
+                                                    <th>FECHA</th>
+                                                    <th>PRIORIDAD</th>
+                                                    <th>SOLICITANTE</th>
+                                                    <th>DEPARTAMENTO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Solicitud_Compra">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Empleado" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Empleado').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Empleado" onkeyup="buscador('filtro_buscador_Empleado', 'Tabla_Empleado');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>C.I. N°</th>
+                                                    <th>EMPLEADO</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Empleado">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Empresa" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Empresa').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Empresa" onkeyup="buscador('filtro_buscador_Empresa', 'Tabla_Empresa');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>RUC</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Empresa">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Proveedor" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Proveedor').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Proveedor" onkeyup="buscador('filtro_buscador_Proveedor', 'Tabla_Proveedor');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>RUC</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Proveedor">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Mercaderia" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Mercaderia').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Mercaderia" onkeyup="buscador('filtro_buscador_Mercaderia', 'Tabla_MercaderiaCompras');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>UNIDAD DE MEDIDA</th>
+                                                    <th>MARCA</th>
+                                                    <th>P. UNITARIO</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_MercaderiaCompras">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Orden_Compra" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Orden_Compra').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Orden_Compra" onkeyup="buscador('filtro_buscador_Orden_Compra', 'Tabla_Orden_Compra');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>ORDEN COMPRA NRO.</th>
+                                                    <th>FECHA</th>
+                                                    <th>PROVEEDOR</th>
+                                                    <th>EMPLEADO</th>
+                                                    <th>SOLICITUD COMPRA NRO.</th>
+                                                    <th>CONDICION DE COMPRA</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Orden_Compra">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row w3-right-align">
+                                <label style="display:inline; margin-left: 45%" class="w3-label">TOTAL: &nbsp;</label>
+                                <input style="margin-top: 1%; display:inline; margin-left: 2%; width:20% ;outline: none; background: #ffffff" class="total w3-input" type="text" disabled="" id="precio_total" value required>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" agregarOrdenCompra(), abrirDocPdf(6), limpiarOrdenCompra();" >
+                                    <i class="fas fa-plus"></i>
+                                    GENERAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" eliminarOrdenCompra(), limpiarOrdenCompra();" >
+                                    <i class="far fa-trash-alt"></i>
+                                    ANULAR
+                                </button>
+                                <button id="imprimir" disabled="" class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" abrirDocPdf(6), limpiarOrdenCompra();" >
+                                    <i class="fas fa-print"></i>
+                                    IMPRIMIR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputOrden_Compra(
+                                                'solcitud_compra_nro', 'codigo_empleado', 'codigo_empresa', 'codigo_proveedor', 'condicion_compra', 'codigo_mercaderia', 'cantidad_mercaderia'), Fecha_Orden_Compra();" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="mostrarOrdenCompra(), limpiarOrdenCompra();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="limpiarOrdenCompra();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/Menu.js"></script>
+        <!--<script type="text/javascript" src="../Recursos/JS/AccesoJS.js"></script>-->
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Full-width input fields */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #007057;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            /* Extra styles for the cancel button */
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+
+            /* Center the image and position the close button */
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                padding-top: 10px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                border: 1px solid #888;
+                width: 30%; /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button (x) */
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate {
+                -webkit-animation: animatezoom 0.6s;
+                animation: animatezoom 0.6s
+            }
+
+            @-webkit-keyframes animatezoom {
+                from {-webkit-transform: scale(0)} 
+                to {-webkit-transform: scale(1)}
+            }
+
+            @keyframes animatezoom {
+                from {transform: scale(0)} 
+                to {transform: scale(1)}
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+                .cancelbtn {
+                    width: 100%;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+//Global var to store a reference to the opened window
+            var openedWindow;
+
+            function openWindow()
+            {
+                openedWindow = window.open('Menu.html');
+            }
+
+            function closeOpenedWindow()
+            {
+                openedWindow.close();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_menu" class="w3-container" enctype="multipart/form-data">
+
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:1024px; margin:0 auto;">
+                        <div class="w3-display-container w3-blue-gray">
+                            <div class="w3-container">
+                                <br>
+                                <br>
+                                <div class="w3-display-left"><img src="../Recursos/Img/SIG.png" alt="Logo"></div>
+                                <br>
+                                <br>
+                                <div class="w3-display-right"><img src="../Recursos/Img/lpg.png" alt="Logo"></div>
+                                <br>
+                                <br>
+                            </div> 
+                        </div>
+
+                        <div class="w3-container">
+                            <div class="w3-bar w3-light-grey">
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Archivo</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-exclamation-triangle'></i> Acceder</a>
+                                        <a href="Usuario.html" class="w3-bar-item w3-button"><i class="fas fa-users"></i> Usuarios</a>
+                                        <a href="Perfil.html" class="w3-bar-item w3-button"><i class="fas fa-address-book"></i> Perfil</a>
+                                        <a href="Permiso.html" class="w3-bar-item w3-button"><i class='fas fa-sign-in-alt'></i> Permisos</a>
+                                        <a href="Empresa.html" class="w3-bar-item w3-button"><i class="fas fa-building"></i> Empresa</a>
+                                        <a href="Departamento.html" class="w3-bar-item w3-button"><i class="fas fa-chalkboard-teacher"></i> Departamento</a>
+                                        <a href="Ciudad.html" class="w3-bar-item w3-button"><i class="fas fa-city"></i> Ciudad</a>
+                                        <a href="Nacionalidad.html" class="w3-bar-item w3-button"><i class="fas fa-globe-americas"></i> Nacionalidad</a>
+                                        <a href="Sucursal.html" class="w3-bar-item w3-button"><i class="fas fa-store-alt"></i> Sucursal</a>
+                                        <a href="Deposito.html" class="w3-bar-item w3-button"><i class='fas fa-warehouse'></i> Depósito</a>
+                                        <a href="#"class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Personas</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="Empleado.html" class="w3-bar-item w3-button"><i class="far fa-id-card"></i> Listado de Empleados</a>
+                                        <a href="Cliente.html" class="w3-bar-item w3-button"><i class="fab fa-slideshare"></i> Listado de Clientes</a>
+                                        <a href="Proveedor.html" class="w3-bar-item w3-button"><i class="fas fa-people-carry"></i> Listado de Proveedores</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Artículos</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="Mercaderia.html" class="w3-bar-item w3-button"><i class="fas fa-dolly"></i> Mercadería</a>
+                                        <a href="Impuesto.html" class="w3-bar-item w3-button"><i class="fas fa-percent"></i> Tipo Impuesto</a>
+                                        <a href="Marca.html" class="w3-bar-item w3-button"><i class='fas fa-shield-alt'></i> Marca</a>
+                                        <a href="Unidad_Medida.html" class="w3-bar-item w3-button"><i class="fas fa-balance-scale"></i> Unidad de Medida</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Gestionar Compra</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="Solicitud_Compra.html" class="w3-bar-item w3-button"><i class='far fa-file-alt'></i> Solicitud de Compra</a>
+                                        <a href="Orden_Compra.html" class="w3-bar-item w3-button"><i class='far fa-newspaper'></i> Orden de Compra</a>
+                                        <a href="Factura_Compra.html" class="w3-bar-item w3-button"><i class='fas fa-scroll'></i> Factura de Compra</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-sticky-note'></i> Nota de Compra</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-edit'></i> Ajuste de Stock</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-clipboard'></i> Nota de Remisión</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Informes Varios</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Inf. Ref. Compras</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Gestionar Facturación</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-alt'></i> Orden de Facturación</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-scroll'></i> Generar Facturación</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-sticky-note'></i> Generar Nota de Venta</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-money-check-alt'></i> Generar Recibo</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Informes Varios</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Inf. Ref. Facturación</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Gestionar Servicio</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-alt'></i> Registrar Contrato</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-scroll'></i> Designación de Convoy</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-sticky-note'></i> Programa de Carga</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-sticky-note'></i> Conocimiento de Embarque</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-sticky-note'></i> Manifiesto de Carga</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-money-check-alt'></i> Posición de Convoy</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Informes Varios</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Inf. Ref. Flete</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Varios</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a href="Moneda.html" class="w3-bar-item w3-button"><i class="fas fa-money-bill-alt"></i> Moneda</a>
+                                        <a href="Banco.html" class="w3-bar-item w3-button"><i class="fas fa-university"></i> Bancos</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-file-code'></i> Timbrados</a>
+                                        <a href="Embarcacion.html" class="w3-bar-item w3-button"><i class="fas fa-ship"></i> Barcos</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-pallet'></i> Puertos</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-boxes'></i> Import Export</a>
+                                        <a href="Tipo_Factura.html" class="w3-bar-item w3-button"><i class='fas fa-search-dollar'></i> Tipo Factura</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-boxes'></i> Barcazas</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-boxes'></i> Tipo de Barcazas</a>
+                                        <a href="Embarcacion.html" class="w3-bar-item w3-button"><i class="fas fa-ship"></i> Embarcaciones</a>
+                                        <a href="#" class="w3-bar-item w3-button"><i class='fas fa-boxes'></i> Tipo de Embarcaciones</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Ayuda</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a onclick="doOpen()" class="w3-bar-item w3-button"><i class="fas fa-question-circle"></i> Ayuda Interactiva</a>
+                                    </div>
+                                </div>
+                                <div class="w3-dropdown-hover">
+                                    <button class="w3-button">Salir</button>
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <a window.open href=("../index.html","_self") class="w3-bar-item w3-button"><i class='far fa-file-pdf'></i> Cerrar Sesión</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="container">
+                            <img src="../Recursos/Img/Publicidad.jpg" alt="Snow" style="width:100%;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

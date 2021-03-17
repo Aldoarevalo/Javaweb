@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!-- 
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/Solicitud_CompraJS.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/moment.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            function abrirDocPdf(bandera) {
+                var filtro;
+                //var url="/JavaWeb_Compras/Informes_ComprasCTR?bandera="+bandera;
+                if (bandera === 5) {
+                    filtro = document.getElementById('codigo_solicitud').value;
+                    url = "/JavaWeb_Compras/Informes_ComprasCTR?bandera=" + bandera + "&filtro=" + filtro;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                //xhr.open("GET", "/LaboratorioLPIII/GestorReportesCTRL?bandera="+bandera+"&valor="+idFiltro+"");
+                xhr.responseType = "arraybuffer";
+
+                xhr.onload = function () {
+                    if (this.status === 200) {
+                        var blob = new Blob([xhr.response], {type: "application/pdf"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        window.open(objectUrl, '_blank');
+                    }
+                };
+                xhr.send();
+                // xhr.send(JSON.stringify(datos = {bandera: bandera}));
+                //xhr.send(JSON.stringify(datos = {bandera: 5, id: $('#codigo_solicitud').val()}));
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_solicitud_compra" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+                            <h2 class="w3-center">SOLICITUD DE COMPRA</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "GENERAR".</p>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="column left" style="background-color:#ffffff;">
+                                    <div class="w3-col" style=" width:100%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Solicitud de Compra N°:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Fecha:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-large w3-right">
+                                            <label class="w3-label w3-validate">Solicitado por:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Empleado:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Departamento:&nbsp;</label>
+                                        </p>
+
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Depóstito - Sucursal:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Prioridad de Compra:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Observación:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-large w3-right">
+                                            <label class="w3-label w3-validate">Detalle:&nbsp;</label>
+                                        </p>
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Cód. Mercadería:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="column right" style="background-color:#ffffff;">
+                                    <input style="margin-bottom: 1%; width:10%; outline: none; background: #ccc" class="w3-input" type="text" id="codigo_solicitud" onkeypress="if (event.keyCode === 13) {
+                                                RecuperarSolicitud();
+                                            }
+                                           " placeholder=" " size="80" tabindex="2" value required>
+                                    <div class="w3-rest">
+                                        <input style="width:40% ;outline: none; background: #ffffff"  class="w3-input" type="date" disabled="" id="fecha_solicitud" size="80" tabindex="2" value required>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="w3-rest">
+                                        <input style="display:inline; width:10% ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_empleado" size="80" tabindex="2" value required onfocus="mostrarEmpleadoSoli()">
+                                        <input style="display:inline; margin-left: 2%; margin-bottom: 1%; width:87% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="empleado" size="80" tabindex="2" value required>
+                                        <input style="display:inline; width:10%; ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_departamento" size="80" tabindex="2" value required onfocus="mostrarDepartamento()">
+                                        <input style="display:inline; margin-left: 2%; margin-bottom: 1%; width:87% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="departamento" size="80" tabindex="2" value required>
+                                        <input style="display:inline; width:10%; ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_deposito" size="80" tabindex="2" value required onfocus="mostrarDeposito()">
+                                        <input style="display:inline; margin-left: 2%; margin-bottom: 1%; width:32% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="deposito" size="80" tabindex="2" value required>
+                                        <input style="display:inline; margin-left: 2%; margin-bottom: 1%; width:52% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="sucursal" size="80" tabindex="2" value required>
+                                        <select style="display: inline; outline: none; margin-left: 0%; margin-bottom: 1%; width: 40%" disabled="" class="w3-select" name="MenuPrioridad" id="menuPrioridad">
+                                            <option id="col_1" value="0">--------------------</option>
+                                            <option id="col_2" value="URGENTE">URGENTE</option>
+                                            <option id="col_3" value="NORMAL">NORMAL</option>
+                                        </select>
+                                        <input style="display:inline; margin-left: 0%; margin-bottom: 1%; width:100% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="observacion_solicitud" size="80" tabindex="2" value required>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="w3-rest">
+                                        <input style="display:inline; width:10% ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_mercaderia" size="80" tabindex="2" value required onfocus="mostrarMercaderia()">
+                                        <input style="display:inline; margin-left: 1%; margin-bottom: 1%; width:15% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="medida" placeholder="Medida" size="80" tabindex="2" value required>
+                                        <input style="display:inline; margin-left: 1%; margin-bottom: 1%; width:36% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="mercaderia" placeholder="Mercaderia" size="80" tabindex="2" value required>
+                                        <input style="display:inline; margin-left: 1%; margin-bottom: 1%; width:18% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="marca" placeholder="Marca" size="80" tabindex="2" value required>
+
+                                        <input onkeyup="format(this)" onchange="format(this)" style="display:inline; margin-left: 1%; margin-bottom: 1%; width:13% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="cantidad_mercaderia" placeholder="Cantidad" size="80" tabindex="2" value required
+                                               onkeypress="if (event.keyCode === 13) {
+                                                           verificar(),
+                                                                   agregarFilaMercaderia(), limpiarInputMercaderia();
+                                                           //limpiarDetaProductos();
+                                                       }">
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Empleado" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Empleado').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Empleado" onkeyup="buscador('filtro_buscador_Empleado', 'Tabla_Empleado');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>C.I. N°</th>
+                                                    <th>EMPLEADO</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Empleado">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Departamento" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Departamento').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Departamento" onkeyup="buscador('filtro_buscador_Departamento', 'Tabla_Departamento');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Departamento">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Deposito" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Deposito').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Deposito" onkeyup="buscador('filtro_buscador_Deposito', 'Tabla_Deposito');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DEPOSITO</th>
+                                                    <th>SUCURSAL</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Deposito">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Mercaderia" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Mercaderia').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Mercaderia" onkeyup="buscador('filtro_buscador_Mercaderia', 'Tabla_Mercaderia');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>UNIDAD DE MEDIDA</th>
+                                                    <th>MARCA</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Mercaderia">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Solicitud" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Solicitud').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Solicitud" onkeyup="buscador('filtro_buscador_Solicitud', 'Tabla_Solicitud');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>NRO. DE SOLICITUD</th>
+                                                    <th>FECHA</th>
+                                                    <th>PRIORIDAD</th>
+                                                    <th>EMPLEADO</th>
+                                                    <th>DEPARTAMENTO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Solicitud">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div>
+                                <table class="w3-table-all" >
+                                    <thead>
+                                        <tr>
+                                            <th style=" width: 10%;">CODIGO</th>
+                                            <th style=" width: 10%;">MEDIDA</th>
+                                            <th style=" width: 40%;">DESCRIPCION</th>
+                                            <th style=" width: 20%;">MARCA</th>
+                                            <th style=" width: 10%;">CANTIDAD</th>
+                                            <th style=" width: 5%;"><img class="update" id="update" src="../Recursos/Img/update.png"/></th>
+                                            <th style=" width: 5%;"><img id="delete" src="../Recursos/Img/delete.png"/></th>
+                                            <!-- 
+                                            <th style=" width: 5%;"><img id="update" src="../Recursos/Img/update.png"/></th>
+                                            <th style=" width: 5%;"><img id="delete" src="../Recursos/Img/delete.png"/></th>
+                                            -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalleTablaMercaderia"> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" agregarSolicitud(), limpiarSolcitud();" >
+                                    <i class="fas fa-plus"></i>
+                                    GENERAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" eliminarSolicitud(), limpiarSolcitud();" >
+                                    <i class="far fa-trash-alt"></i>
+                                    ANULAR
+                                </button>
+                                <button id="imprimir" disabled="" class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" abrirDocPdf(5), limpiarSolcitud();" >
+                                    <i class="fas fa-print"></i>
+                                    IMPRIMIR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputSolicitud(
+                                                'codigo_empleado', 'codigo_departamento', 'codigo_deposito', 'menuPrioridad', 'observacion_solicitud', 'codigo_mercaderia', 'cantidad_mercaderia'), Fecha();" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="mostrarSolicitud();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="limpiarSolcitud();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

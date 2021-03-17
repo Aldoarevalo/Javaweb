@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="Recursos/CSS/w3.css">
+        <script type="text/javascript" src="Recursos/JS/AccesoJS.js"></script>
+        <script type="text/javascript" src="Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="Recursos/JS/all.js"></script>
+        <style>
+            body, html {
+                height: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .bg-img {
+                /* The image used */
+                background-image: url("Recursos/Img/Publicidad.jpg");
+
+                min-height: 390px;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Add styles to the form container */
+            .container {
+                position: absolute;
+                right: 0;
+                margin: 20px;
+                max-width: 300px;
+                padding: 16px;
+                background-color: white;
+            }
+
+            /* Full-width input fields */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+            }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+            /* Set a style for the submit button */
+            .btn {
+                background-color: #007057;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                opacity: 0.9;
+            }
+
+            .btn:hover {
+                opacity: 1;
+            }
+        </style>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Full-width input fields */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #007057;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            /* Extra styles for the cancel button */
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+
+            /* Center the image and position the close button */
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                padding-top: 10px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                border: 1px solid #888;
+                width: 30%; /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button (x) */
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate {
+                -webkit-animation: animatezoom 0.6s;
+                animation: animatezoom 0.6s
+            }
+
+            @-webkit-keyframes animatezoom {
+                from {-webkit-transform: scale(0)} 
+                to {-webkit-transform: scale(1)}
+            }
+
+            @keyframes animatezoom {
+                from {transform: scale(0)} 
+                to {transform: scale(1)}
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+                .cancelbtn {
+                    width: 100%;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+//Global var to store a reference to the opened window
+            var openedWindow;
+
+            function openWindow()
+            {
+                openedWindow = window.open('Menu.html');
+            }
+
+            function closeOpenedWindow()
+            {
+                openedWindow.close();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="w3-panel w3-card-4 w3-padding-0" style=" width:1024px; margin:0 auto;">
+            <div class="w3-panel w3-card w3-blue-gray" style="height: 152px; ">
+                <div class="w3-display-container w3-blue-gray">
+                    <div class="w3-container">
+                        <br><br><br><br><br><br>
+                        <div class="w3-display-left"><img src="Recursos/Img/SIG.png" alt="Logo"></div>
+                        <div class="w3-display-right"><img src="Recursos/Img/lpg.png" alt="Logo"></div>
+                    </div> 
+                </div>
+                <div class="w3-bar w3-blue-gray" id="menu_principal">
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="bg-img" style="width: 1024px">
+            <form id="panelAcceso" class="container">
+                <h1>Login</h1>
+                <label class="w3-label w3-validate"><b>Usuario:&nbsp;</b></label>
+                <input id="datos_usuario" type="text" placeholder="Ingrese su Usuario" onkeypress="
+                        if (event.keyCode === 13) {
+                            document.getElementById('datos_clave').focus();
+                        }" required>
+
+                <label class="w3-label w3-validate"><b>Contraseña:&nbsp;</b></label>
+                <input id="datos_clave" type="password" placeholder="Ingrese la Contraseña" onkeypress="
+                        if (event.keyCode === 13) {
+                            document.getElementById('submit').focus();
+                        }" required>
+                <input type="checkbox" onclick="showpassword()">Show Password <br>
+                <button id="submit" class="btn" type="button" onclick="validarUsuario();">Ingresar</button>
+            </form>
+        </div>
+        <!--                <div style="width: 100%">
+                            <div class="w3-container">
+                                <div class="w3-bar w3-light-grey" id="menu_principal">
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div style="text-align: center ">
+                            <iframe name="contenedor_paginas" 
+                                    frameborder="0" width="1000" height="1000"> 
+                            </iframe> 
+                        </div>-->
+        <script>
+            function showpassword() {
+                var x = document.getElementById("datos_clave");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
+    </body>
+</html>

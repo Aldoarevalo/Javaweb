@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/MercaderiaJS.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+        <style> 
+            input[type=text] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 5px 0;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            input[type=text]:focus {
+                border: 2px solid #555;
+            }
+            select {
+                width: 100%;
+                padding: 16px 20px;
+                border: none;
+                border-radius: 4px;
+                background-color: #f1f1f1;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_mercaderia" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+                            <h2 class="w3-center">REGISTRAR MERCADERIA</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "REGISTRAR".</p>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 0%;">
+                                <label class="w3-small w3-left">Código de Mercadería:&nbsp;</label>
+                            </div>
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 5%;">
+                                <label class="w3-small w3-left">Descripción:&nbsp;</label>
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 15%">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_mercaderia" onkeypress="if (event.keyCode === 13) {
+                                            recuperarMercaderia();
+                                        }" 
+                                       name="fname" placeholder="Cód..">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 75%; margin-left: 10%;">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="descripcion_mercaderia" placeholder="Ingrese el Nombre de la Mercadería...">
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 0%;">
+                                <label class="w3-small w3-left">Cantidad:&nbsp;</label>
+                            </div>
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 35%;">
+                                <label class="w3-small w3-left">Unidad de medida:&nbsp;</label>
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="cantidad_mercaderia" placeholder="Ingrese Cantidad..." >
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 20%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_unidad_medida" onfocus="mostrarTablaUnidadMedida()">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="unidad_medida" placeholder="Unidad de Medida...">
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 0%;">
+                                <label class="w3-small w3-left">Precio Unitario:&nbsp;</label>
+                            </div>
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 35%;">
+                                <label class="w3-small w3-left">Marca:&nbsp;</label>
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" onkeyup="format(this)" onchange="format(this)" id="precio_unitario" placeholder="Ingrese el Precio Unitario..." >
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 20%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_marca" onfocus="mostrarTablaMarcaMercaderia()">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="marca" placeholder="Seleccione la Marca...">
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 0%;">
+                                <label class="w3-small w3-left">Depósito:&nbsp;</label>
+                            </div>
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 35%;">
+                                <label class="w3-small w3-left">Sucursal:&nbsp;</label>
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 0%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_deposito" onfocus="mostrarTablaDepositoMercaderia()">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="deposito" placeholder="Seleccione el Depósito...">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 10%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_sucursal" onfocus="mostrarTablaSucursalMercaderia()">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="sucursal" placeholder="Seleccione la Sucursal...">
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 0%;">
+                                <label class="w3-small w3-left">Tipo de Impuesto:&nbsp;</label>
+                            </div>
+                            <div class="w3-col w3-responsive-etiquetas" style="width: 20%; margin-left: 35%;">
+                                <label class="w3-small w3-left">Moneda:&nbsp;</label>
+                            </div>
+                        </div>
+
+                        <div class="w3-row">
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 0%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_impuesto" onfocus="mostrarTablaImpuestoMercaderia()">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="impuesto" placeholder="Seleccione la Unidad de Medida...">
+                            </div>
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 10%; margin-left: 10%;">
+                                <input style="width:100%; outline: none; background: #ccc" disabled ="" type="text" id="codigo_moneda" onfocus="mostrarTablaMoneda()">
+                            </div>
+
+                            <div class="w3-rest w3-responsive-etiquetas" style="width: 35%">
+                                <input style="outline: none; background: #ffffff" disabled="" type="text" id="moneda" placeholder="Seleccione la Moneda...">
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Mercaderia" onkeyup="buscadorMercaderia();">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cód.</th>
+                                                    <th>Descripción</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Unidad de Medida</th>
+                                                    <th>Precio Unitario</th>
+                                                    <th>Marca</th>
+                                                    <th>Depósito</th>
+                                                    <th>Sucursal</th>
+                                                    <th>Impuesto</th>
+                                                    <th>Moneda</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaMercaderia"></tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Unidad_Medida" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Unidad_Medida').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Unidad_Medida" onkeyup="buscador('filtro_buscador_Unidad_Medida', 'TablaUnidad_Medida');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaUnidad_Medida">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Moneda" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Moneda').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Moneda" onkeyup="buscador('filtro_buscador_Moneda', 'TablaMoneda');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaMoneda">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Deposito" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Deposito').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Deposito" onkeyup="buscador('filtro_buscador_Deposito', 'Tabla_Deposito');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Deposito">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Sucursal" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Sucursal').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Sucursal" onkeyup="buscador('filtro_buscador_Sucursal', 'Tabla_Sucursal');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Sucursal">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Impuesto" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Impuesto').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Impuesto" onkeyup="buscador('filtro_buscador_Impuesto', 'Tabla_Impuesto');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Impuesto">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Marca" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Marca').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Marca" onkeyup="buscador('filtro_buscador_Marca', 'Tabla_Marca');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Marca">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" agregarMercaderia(), limpiarMercaderia();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    REGISTRAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" modificarMercaderia(), limpiarMercaderia();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    MODIFICAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick=" eliminarMercaderia(), limpiarMercaderia();" >
+                                    <i class="fa fa-edit fa-lg"></i>
+                                    ELIMINAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputMercaderia('descripcion_mercaderia',
+                                                'cantidad_mercaderia', 'codigo_unidad_medida', 'precio_unitario', 'codigo_moneda', 'codigo_marca', 'codigo_deposito',
+                                                'codigo_sucursal', 'codigo_impuesto');" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick=" mostrarTablaMercaderia(), limpiarMercaderia();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="limpiarMercaderia();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

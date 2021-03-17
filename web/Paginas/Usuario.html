@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Recursos/CSS/w3.css">
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/UsuarioJS.js"></script>
+        <script type="text/javascript" src="../Recursos/JS/all.js"></script>
+    </head>
+
+    <body>
+        <div class="pl-light-grey" id="_geco_sticky_main"> 
+            <div class="w3-container w3-white" id="cont_registrar" style=" margin:0 5% 3% 5%;">
+                <form id="form_usuario" class="w3-container" enctype="multipart/form-data">
+                    <div class="w3-panel w3-card-4 w3-padding-0" style=" width:750px; margin:0 auto;">
+                        <div class="w3-panel w3-card w3-blue-gray">
+                            <h2 class="w3-center">REGISTRAR USUARIO</h2>
+                            <p class="w3-center w3-small">Ingrese los datos solicitados y luego haga clic en "REGISTRAR".</p>
+                        </div>
+                        <div class="w3-container w3-white" id="cont_datos" style=" margin:0 5% 3% 5%;">
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Código:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="width:20%; outline: none; background: #ccc" disabled ="" class="w3-input" type="text" id="codigo_usuario" 
+                                               onkeypress="if (event.keyCode === 13) {
+                                                           recuperarUsuario();
+                                                       }
+                                               " placeholder=" " size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Usuario:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="outline: none; background: #ffffff" disabled="" class="w3-input" type="text" id="descripcion_usuario" placeholder="Ingrese Usuario..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Contraseña:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="w3-rest">
+                                        <input style="outline: none; background: #ffffff" disabled="" class="w3-input" type="password" id="contrasena_usuario" placeholder="Ingrese una Contraseña..." size="80" tabindex="2" value required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Empleado:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="w3-rest">
+                                                <input style="display:inline; width:10% ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_empleado" size="80" tabindex="2" value required onfocus="mostrarEmpleado()">
+                                                <input style="display:inline; margin-left: 0%; margin-bottom: 1%; width:85% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="descripcion_empleado" size="80" tabindex="2" value required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Departamento:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="w3-rest">
+                                                <input style="display:inline; width:10% ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_departamento" size="80" tabindex="2" value required onfocus="mostrarDepartamento()">
+                                                <input style="display:inline; margin-left: 0%; margin-bottom: 1%; width:85% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="descripcion_departamento" size="80" tabindex="2" value required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w3-container">
+                                <div class="w3-row w3-section">
+                                    <div class="w3-col" style=" width:30%;">
+                                        <p class="w3-small w3-right">
+                                            <label class="w3-label w3-validate">Perfil:&nbsp;</label>
+                                        </p>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="w3-rest">
+                                                <input style="display:inline; width:10% ;outline: none; background: #ccc" class="w3-input" type="text" disabled="" id="codigo_perfil" size="80" tabindex="2" value required onfocus="mostrarPerfil()">
+                                                <input style="display:inline; margin-left: 0%; margin-bottom: 1%; width:85% ;outline: none; background: #ffffff" class="w3-input" type="text" disabled="" id="descripcion_perfil" size="80" tabindex="2" value required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Usuario" onkeyup="buscador('filtro_buscador_Usuario', 'TablaUsuario');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Usuario</th>
+                                                    <th>Empleado</th>
+                                                    <th>Departamento</th>
+                                                    <th>Perfil</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaUsuario">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_Abuscar_Empleado" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_Abuscar_Empleado').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscador_Empleado" onkeyup="buscador('filtro_buscador_Empleado', 'Tabla_Empleado');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>CODIGO</th>
+                                                    <th>C.I. N°</th>
+                                                    <th>EMPLEADO</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Tabla_Empleado">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_AbuscarDepartamento" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_AbuscarDepartamento').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscadorDepartamento" onkeyup="buscador('filtro_buscadorDepartamento', 'TablaDepartamento');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Departamento</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaDepartamento">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-container">
+                            <div id="datos_AbuscarPerfil" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <header class="w3-container w3-teal"> 
+                                        <span onclick="document.getElementById('datos_AbuscarPerfil').style.display = 'none'" 
+                                              class="w3-button w3-display-topright">&times;</span>
+                                        <h2>Ingrese Descripción</h2>
+                                        <input class="w3-input w3-border w3-padding" type="text" placeholder="Ingrese dato" id="filtro_buscadorPerfil" onkeyup="buscador('filtro_buscadorPerfil', 'TablaPerfil');">    
+                                    </header>
+                                    <div class="w3-container">
+                                        <table class="w3-table-all">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Perfil</th>
+                                                    <th><img src="../Recursos/Img/select.png" alt="Sel"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody id="TablaPerfil">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <footer class="w3-container w3-teal">
+                                        <p>CLICK SOBRE EL REGISTRO PARA SELECCIONAR</p>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-row w3-section">
+                            <div class="w3-container w3-bar w3-light-gray w3-padding-12">
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick="agregarUsuario(), limpiarUsuario();" >
+                                    <i class="fas fa-plus"></i>
+                                    REGISTRAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick="modificarUsuario(), limpiarUsuario();" >
+                                    <i class="fas fa-edit"></i>
+                                    MODIFICAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-right w3-hover-green w3-small" type="button" onclick="eliminarUsuario(), limpiarUsuario();" >
+                                    <i class="far fa-trash-alt"></i>
+                                    ELIMINAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="habilitaInputUsuario(
+                                                'descripcion_usuario', 'contrasena_usuario', 'codigo_empleado', 'codigo_departamento', 'codigo_perfil');" >
+                                    <i class="fas fa-file-alt"></i>
+                                    NUEVO
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="mostrarTablaUsuario(), limpiarUsuario();" >
+                                    <i class="fas fa-search"></i>
+                                    BUSCAR
+                                </button>
+                                <button class="w3-btn  w3-ripple w3-light-gray w3-left w3-hover-red w3-small" type="button" onclick="limpiarUsuario();" >
+                                    <i class="fas fa-ban"></i>
+                                    CANCELAR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
